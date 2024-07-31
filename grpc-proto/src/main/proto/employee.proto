@@ -1,0 +1,47 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_package = "com.aps.employee.model";
+
+message EmployeeRequest {
+    string id = 1;
+}
+
+message EmployeeListRequest {
+    int32 page = 2;
+    int32 limit = 3;
+}
+
+message CreateEmployeeRequest {
+    string username = 1;
+    string address = 2;
+    string phone = 3;
+    string mail = 4;
+}
+
+message CreateEmployeeResponse {
+    string status = 1;
+    string code = 2;
+    string message = 3;
+}
+
+message EmployeeResponse {
+    string id = 1;
+    string username = 2;
+    string address = 3;
+    string phone = 4;
+    string mail = 5;
+}
+
+message EmployeeListResponse {
+    int64 totalItems = 1;
+    int32 totalPages = 2;
+    int32 currentPage = 3;
+    repeated EmployeeResponse data = 4;
+
+}
+
+service EmployeeService{
+    rpc getEmployee(EmployeeRequest) returns (EmployeeResponse) {};
+    rpc createEmployee(CreateEmployeeRequest) returns (CreateEmployeeResponse) {};
+    rpc getEmployeeList(EmployeeListRequest) returns (EmployeeListResponse) {};
+}
